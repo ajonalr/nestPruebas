@@ -73,3 +73,6 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
   Nest is [MIT licensed](LICENSE).
+
+## Cadena de Texto para generar datas
+mkdir src\api && nest g mo api/api --flat --no-spec && mkdir src\api\products src\database src\auth && nest g mo api/products/products --flat --no-spec && nest g s api/products/products --flat --no-spec && nest g co api/products/products --flat --no-spec && touch src\api\products\products.interface.ts src\api\products\products.model.ts src\api\products\products.dto.ts && nest g mo database/mongo --flat --no-spec && mkdir src`\auth\users src\auth\strategies && nest g mo auth/auth --flat --no-spec && nest g s auth/auth --flat --no-spec && nest g co auth/auth --flat --no-spec && touch src\auth\constants.ts && nest g mo auth/users/users --flat --no-spec && nest g s auth/users/users --flat --no-spec && touch src\auth\strategies\{jwt.strategy.ts,local.strategy.ts}
