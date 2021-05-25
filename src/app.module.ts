@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ApiModule } from './api/api.module';
 import { MongoModule } from './database/mongo.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 
 
@@ -11,7 +12,11 @@ import { AuthModule } from './auth/auth.module';
   imports: [
     ApiModule,
     MongoModule,
-    AuthModule
+    AuthModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env'
+     }),
   ],
   controllers: [AppController],
   providers: [AppService],

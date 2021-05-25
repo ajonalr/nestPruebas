@@ -31,13 +31,7 @@ export class AuthController {
 
     @Post('register')
     async storeUser(@Body() body: IUser, @Response() res) {
-
-
-
         const user = await this.authService.register(body);
-
-
-
         if (user) {
             return res.status(200).json({
                 ok: true,
@@ -50,8 +44,6 @@ export class AuthController {
                 message: 'Algo Salio mal',
             });
         }
-
-
     }
 
 

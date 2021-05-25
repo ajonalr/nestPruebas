@@ -4,12 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
     imports: [
-        MongooseModule.forRoot('mongodb://localhost/pruebas-nest',
-            {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-                useFindAndModify: true,
-               
-            }),    ]
+        MongooseModule.forRoot('mongodb://localhost/auth')
+    ]
 })
 export class MongoModule { }

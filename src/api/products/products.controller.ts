@@ -1,15 +1,15 @@
-import { Controller, Get, Res, HttpStatus, Param, Post, Body, Put, Delete, NotFoundException, UseGuards } from '@nestjs/common';
+import { Controller, Get, Res, HttpStatus, Param, Post, Body, Put, Delete } from '@nestjs/common';
 import { Response, Request } from 'express';
 import { ProductsService } from './products.service';
 import { ProductsDTO } from './products.dto';
-import { JwtAuthGuard } from 'src/auth/guard/jwt.auth.guard';
+import { AuthDecorator } from 'src/common/decorators/auth.decorator';
 
 @Controller('products')
 export class ProductsController {
 
     constructor(private productService: ProductsService) { }
 
-    @UseGuards(JwtAuthGuard)
+    @AuthDecorator()
     @Get()
     async getProducts(@Res() res: Response) {
         const products = await this.productService.getProducts();
@@ -19,13 +19,15 @@ export class ProductsController {
     @Get(':id')
     async getProduct(@Res() res: Response, @Param('id') id: string) {
         const product = await this.productService.getProduct(id);
-        return res.status(HttpStatus.OK).json(product);
+        return {
+            message: `Dato Encontado: ${product.title}`,
+            product
+        }
     }
 
     @Post()
     async store(@Body() productDto: ProductsDTO, @Res() res: Response) {
         const product = await this.productService.saveProduct(productDto);
-        console.log(product);
         return res.status(HttpStatus.CREATED).json(product);
     }
 
