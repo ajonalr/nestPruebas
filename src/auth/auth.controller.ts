@@ -29,25 +29,4 @@ export class AuthController {
 
 
 
-    @Post('register')
-    async storeUser(@Body() body: IUser, @Response() res) {
-        const user = await this.authService.register(body);
-        if (user) {
-            return res.status(200).json({
-                ok: true,
-                message: 'Register Success',
-                user
-            });
-        } else {
-            return res.status(502).json({
-                ok: false,
-                message: 'Algo Salio mal',
-            });
-        }
-    }
-
-
-
-
-
 }

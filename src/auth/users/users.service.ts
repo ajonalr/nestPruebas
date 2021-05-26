@@ -16,14 +16,9 @@ export class UsersService {
         private jwtService: JwtService) { }
 
 
-
-
-
     // para logearce
     async login(username: string, password: string): Promise<IUser> {
         let userObj: IUser;
-
-
         const userFind = await this.userModel.findOne({ username: username });
 
         if (userFind) {
@@ -33,22 +28,18 @@ export class UsersService {
                 return userObj;
             }
         }
-
-
     }
 
 
-    async store(user: UserDTO): Promise<{}> {
+    async create(user: UserDTO): Promise<{}> {
         const newuser = user;
         newuser.password = await bcrypt.hashSync(newuser.password, 10);
         const usernew = await new this.userModel(newuser).save();
-
-
-        const payload = { username: usernew.username, sub: usernew.id };
-        const access_tocken = this.jwtService.sign(payload);
-        return { usernew, access_tocken };
+        return usernew;
     }
 
+
+    
 
 
 }

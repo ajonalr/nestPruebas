@@ -17,16 +17,13 @@ export class AuthService {
     if (user) {
       // elimina el arreglo de los usuarios
       const { password, ...result } = user;
-      
+
       return result;
     }
     return null;
   }
 
   async login(user: any) {
-
-    // console.log(user);
-    
 
     const payload = { username: user.username, sub: user.userId };
 
@@ -38,9 +35,11 @@ export class AuthService {
   }
 
 
-  async register(user: UserDTO) {
-     
-    return await this.usersService.store(user);
 
+  createPayload(user: any) {
+    const payload = { username: user.username, sub: user.id };
+    const access_tocken = this.jwtService.sign(payload);
+    return access_tocken;
   }
+
 }

@@ -1,3 +1,4 @@
+import { UserController } from './user.controller';
 import { Module } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -14,11 +15,8 @@ import { jwtConstants } from '../constants';
       signOptions: { expiresIn: '2h' }
     })
   ],
-  providers: [
-    UsersService
-  ],
-  exports: [
-    UsersService
-  ]
+  controllers: [UserController],
+  providers: [UsersService],
+  exports: [UsersService]
 })
-export class UsersModule {}
+export class UsersModule { }
